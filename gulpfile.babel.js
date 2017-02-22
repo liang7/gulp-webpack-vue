@@ -1,7 +1,6 @@
 import gulp from 'gulp'
 import gutil from 'gulp-util'
 import concat from 'gulp-concat'
-import env from 'gulp-env'
 import webpack from 'webpack'
 import webpackConfigDev from './build/webpack.config.dev.js'
 import webpackConfigTest from './build/webpack.config.test.js'
@@ -14,24 +13,6 @@ import del from 'del'
 gulp.task('clean', function(cb){
     del(['release/*', '!release/lib'])
 });
-
-// 设置测试环境变量
-gulp.task('set-env-test', ()=>{
-    env({
-        vars: {
-            'NODE_ENV':'test'
-        }
-    })
-})
-
-// 设置正式环境变量
-gulp.task('set-env-prod', ()=>{
-    env({
-        vars: {
-            'NODE_ENV':'production'
-        }
-    })
-})
 
 //合并js库文件
 gulp.task('lib',()=>{
@@ -102,7 +83,7 @@ gulp.task('webpack-build',() => {
 gulp.task("dev",["webpack-dev"]);
 
 //打包测试环境
-gulp.task("test",["set-env-test","clean","webpack-test"]);
+gulp.task("test",["clean","webpack-test"]);
 
 //打包正式环境
-gulp.task("build",["set-env-prod","clean","webpack-build"]);
+gulp.task("build",["clean","webpack-build"]);
