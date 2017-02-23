@@ -29,7 +29,6 @@
     "del": "^2.2.2",
     "element-ui": "^1.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "webpack-uglify-parallel": "^0.1.3",
     "file-loader": "^0.8.5",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",

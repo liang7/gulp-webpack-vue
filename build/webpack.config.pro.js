@@ -5,8 +5,6 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path=require('path');
-var os = require('os');
-var UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 
 module.exports={
     entry: {
@@ -45,13 +43,10 @@ module.exports={
         ]
     },
     plugins: [
-        new UglifyJsParallelPlugin({
-            workers: os.cpus().length,
-            mangle: true,
-            compressor: {
-                warnings: false,
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
                 drop_console: true,
-                drop_debugger: true
+                warnings: false
             }
         }),
         new webpack.DefinePlugin({

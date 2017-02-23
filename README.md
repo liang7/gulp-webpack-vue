@@ -21,8 +21,8 @@ cd 目录后运行： npm install （在node环境下）
 ### 5.2开发
 运行 gulp dev
 此命令会启动一个webpack dev server，更新代码后会实时更新打包文件，在运行gulp dev之前至少运行gulp test或gulp build一次
+访问 http://localhost:8080/release/# 可以查看效果
 
-访问http://localhost:8080/release 可以查看效果
 ### 5.3打包测试代码
 运行 gulp test，生成文件在release目录，可直接打开index.html
 
