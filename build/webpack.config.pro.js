@@ -1,14 +1,15 @@
 /**
  *  生产环境  
  */
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path=require('path');
+let webpack = require('webpack');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let path=require('path');
+import loadersConfig from './webpack.config.loaders.js'
 
 module.exports={
     entry: {
-        index:'./src/app.js'
+        app:'./src/app.js'
     },
     output:{
         path:path.resolve(__dirname, "../release"),
@@ -29,29 +30,13 @@ module.exports={
         }
     },
     module: {
-        loaders: [
-            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-            {test: /\.less$/, loader: ExtractTextPlugin.extract('css-loader', 'less-loader')},
-            {test: /\.(png|jpg|gif)$/, loader: 'url-loader?name=images/[hash].[ext]&limit=8192'},
-            {test: /\.vue$/, loader: 'vue' },
-            {test: /\.js$/, exclude: /node_modules|vue\/src|vue-router\/|vue-loader\//, loader: 'babel' },
-            {test: /\.(html|tpl)$/, loader: 'html-loader'},
-            {test: /\.woff/, loader : 'url?prefix=font/&limit=10000&mimetype=application/font-woff' },
-            {test: /\.ttf/,loader : 'file?prefix=font/'}, 
-            {test: /\.eot/,loader : 'file?prefix=font/'}, 
-            {test: /\.svg/,loader : 'file?prefix=font/'}
-        ]
+        loaders: loadersConfig
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 drop_console: true,
                 warnings: false
-            }
-        }),
-        new webpack.DefinePlugin({
-            'process.env':{
-                'NODE_ENV': JSON.stringify('production')
             }
         }),
         new ExtractTextPlugin("[name].[contenthash:8].css", {

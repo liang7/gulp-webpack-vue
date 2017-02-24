@@ -1,10 +1,11 @@
 /**
  *  开发环境  
  */
-var webpack = require('webpack');
-var path=require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+let webpack = require('webpack');
+let path=require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+import loadersConfig from './webpack.config.loaders.js'
 
 module.exports={
     //这里写成数组是为了dev server插入服务配置
@@ -30,18 +31,7 @@ module.exports={
         }
     },
     module: {
-        loaders: [
-            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-            {test: /\.less$/, loader: ExtractTextPlugin.extract('css-loader', 'less-loader')},
-            {test: /\.(png|jpg|gif)$/, loader: 'url-loader?name=images/[hash].[ext]&limit=8192'},
-            {test: /\.vue$/, loader: 'vue' },
-            {test: /\.js$/, exclude: /node_modules|vue\/src|vue-router\/|vue-loader\//, loader: 'babel' },
-            {test: /\.(html|tpl)$/, loader: 'html-loader'},
-            {test: /\.woff/, loader : 'url?prefix=font/&limit=10000&mimetype=application/font-woff' },
-            {test: /\.ttf/,loader : 'file?prefix=font/'}, 
-            {test: /\.eot/,loader : 'file?prefix=font/'}, 
-            {test: /\.svg/,loader : 'file?prefix=font/'}
-        ]
+        loaders: loadersConfig
     },
     plugins: [
         new HtmlWebpackPlugin({
